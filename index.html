@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Pet Simulator!</title>
+    </head>
+    <body>
+        <style>
+
+        </style>
+        <script>
+            var type = "cat.png"
+            let hunger = document.cookie = 100
+            var hunger_rate = 6000
+            var food = 5
+
+            var reducer = setInterval(() => {
+                hunger = hunger - 1
+                document.getElementById("p1").innerHTML = "HUNGER: " + hunger;
+            }, hunger_rate)
+
+            function feed() {
+                if (hunger === 100 || hunger === 0 || food === 0) {
+                    return
+                } else {
+                    hunger = hunger + 1
+                    food = food - 1
+                    document.getElementById("p1").innerHTML = "HUNGER: " + hunger;        
+                    document.getElementById("p3").innerHTML = "FOOD: " + food;
+                    document.getElementById("pet_type").src = "textures/" + type;
+
+                }
+
+            }
+            var checker = setInterval(() => {
+                if(hunger <= 0) {
+                    alert("your pet died")
+                    clearInterval(checker);
+                    clearInterval(reducer);
+
+                }
+            },hunger_rate)
+        </script>
+        <img id="pet_type" src="textures/dog.png">
+        <button onclick="feed()">FEED YOUR PET</button>
+        <p id="p1">HUNGER: 100</p>
+        <p id="p2">HIGENE: 100</p>
+        <p id="p3">FOOD: 5</p>
+        <p id="text"></p>
+
+    </body>
+</html>
